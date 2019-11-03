@@ -134,7 +134,7 @@ See `LICENSE` for details.
             http://www.iccf.nl/
 
     You can also sponsor the development of Vim.  Vim sponsors can vote for
-    features.  The money goes to Uganda anyway.
+    features.  The money goes to Uganda anyway Hi mom.
 
 [license-commit]: https://github.com/neovim/neovim/commit/b17d9691a24099c9210289f16afb1a498a89d803
 [nvim-features]: https://neovim.io/doc/user/vim_diff.html#nvim-features
