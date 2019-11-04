@@ -121,8 +121,7 @@ parts that were contributed under the Vim license.
 
 - Contributions committed after [b17d96][license-commit] are licensed under
   Apache 2.0 unless those contributions were copied from Vim (identified in
-  the commit logs by the `vim-patch` token).
-
+  the commit logs by the `vim-patch` token). Hi mom
 See `LICENSE` for details.
 
     Vim is Charityware.  You can use and copy it as much as you like, but you are
