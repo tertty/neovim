@@ -931,14 +931,14 @@ EXTERN char_u e_invchanjob[] INIT(= N_("E900: Invalid channel id: not a job"));
 EXTERN char_u e_jobtblfull[] INIT(= N_("E901: Job table is full"));
 EXTERN char_u e_jobspawn[] INIT(= N_(
     "E903: Process failed to start: %s: \"%s\""));
-EXTERN char_u e_channotpty[] INIT(= N_("E904: channel is not a pty"));
+EXTERN char_u e_channotpty[] INIT(= N_("E904: Channel is not a pty"));
 EXTERN char_u e_stdiochan2[] INIT(= N_(
     "E905: Couldn't open stdio channel: %s"));
-EXTERN char_u e_invstream[] INIT(= N_("E906: invalid stream for channel"));
+EXTERN char_u e_invstream[] INIT(= N_("E906: Invalid stream for channel"));
 EXTERN char_u e_invstreamrpc[] INIT(= N_(
-    "E906: invalid stream for rpc channel, use 'rpc'"));
+    "E906: Invalid stream for rpc channel, use 'rpc'"));
 EXTERN char_u e_streamkey[] INIT(= N_(
-    "E5210: dict key '%s' already set for buffered stream in channel %"
+    "E5210: Dict key '%s' already set for buffered stream in channel %"
     PRIu64));
 EXTERN char_u e_libcall[] INIT(= N_("E364: Library call failed for \"%s()\""));
 EXTERN char e_fsync[] INIT(= N_("E667: Fsync failed: %s"));
@@ -993,7 +993,7 @@ EXTERN char_u e_scroll[] INIT(= N_("E49: Invalid scroll size"));
 EXTERN char_u e_shellempty[] INIT(= N_("E91: 'shell' option is empty"));
 EXTERN char_u e_signdata[] INIT(= N_("E255: Couldn't read in sign data!"));
 EXTERN char_u e_swapclose[] INIT(= N_("E72: Close error on swap file"));
-EXTERN char_u e_tagstack[] INIT(= N_("E73: tag stack empty"));
+EXTERN char_u e_tagstack[] INIT(= N_("E73: Tag stack empty"));
 EXTERN char_u e_toocompl[] INIT(= N_("E74: Command too complex"));
 EXTERN char_u e_longname[] INIT(= N_("E75: Name too long"));
 EXTERN char_u e_toomsbra[] INIT(= N_("E76: Too many ["));
@@ -1012,7 +1012,7 @@ EXTERN char_u e_usingsid[] INIT(= N_(
     "E81: Using <SID> not in a script context"));
 EXTERN char_u e_maxmempat[] INIT(= N_(
         "E363: pattern uses more memory than 'maxmempattern'"));
-EXTERN char_u e_emptybuf[] INIT(= N_("E749: empty buffer"));
+EXTERN char_u e_emptybuf[] INIT(= N_("E749: Empty buffer"));
 EXTERN char_u e_nobufnr[] INIT(= N_("E86: Buffer %" PRId64 " does not exist"));
 
 EXTERN char_u e_invalpat[] INIT(= N_(
@@ -1026,7 +1026,7 @@ EXTERN char_u e_au_recursive[] INIT(= N_(
     "E952: Autocommand caused recursive behavior"));
 EXTERN char_u e_unsupportedoption[] INIT(= N_("E519: Option not supported"));
 EXTERN char_u e_fnametoolong[] INIT(= N_("E856: Filename too long"));
-EXTERN char_u e_float_as_string[] INIT(= N_("E806: using Float as a String"));
+EXTERN char_u e_float_as_string[] INIT(= N_("E806: Using Float as a String"));
 
 EXTERN char_u e_autocmd_err[] INIT(=N_(
     "E5500: autocmd has thrown an exception: %s"));
