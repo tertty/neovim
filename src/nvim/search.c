@@ -3808,8 +3808,9 @@ current_quote(
     }
 
     vis_bef_curs = lt(VIsual, curwin->w_cursor);
+    vis_empty = equalpos(VIsual, curwin->w_cursor);
     if (*p_sel == 'e') {
-      if (!vis_bef_curs) {
+      if (!vis_bef_curs && !vis_empty) {
         // VIsual needs to be start of Visual selection.
         pos_T t = curwin->w_cursor;
 
@@ -3819,8 +3820,8 @@ current_quote(
         restore_vis_bef = true;
       }
       dec_cursor();
+      vis_empty = equalpos(VIsual, curwin->w_cursor);
     }
-    vis_empty = equalpos(VIsual, curwin->w_cursor);
   }
 
   if (!vis_empty) {
@@ -4037,9 +4038,6 @@ current_search(
   bool old_p_ws = p_ws;
   pos_T save_VIsual = VIsual;
 
-  /* wrapping should not occur */
-  p_ws = false;
-
   /* Correct cursor when 'selection' is exclusive */
   if (VIsual_active && *p_sel == 'e' && lt(VIsual, curwin->w_cursor))
     dec_cursor();
@@ -4063,8 +4061,7 @@ current_search(
   int zero_width = is_zero_width(spats[last_idx].pat, true, &curwin->w_cursor,
                                  FORWARD);
   if (zero_width == -1) {
-    p_ws = old_p_ws;
-    return FAIL;      /* pattern not found */
+    return FAIL;  // pattern not found
   }
 
   /*
@@ -4081,10 +4078,17 @@ current_search(
     }
     end_pos = pos;
 
+    // wrapping should not occur in the first round
+    if (i == 0) {
+      p_ws = false;
+    }
+
     result = searchit(curwin, curbuf, &pos, &end_pos,
                       (dir ? FORWARD : BACKWARD),
                       spats[last_idx].pat, i ? count : 1,
                       SEARCH_KEEP | flags, RE_SEARCH, NULL);
+
+    p_ws = old_p_ws;
 
     // First search may fail, but then start searching from the
     // beginning of the file (cursor might be on the search match)
@@ -4094,7 +4098,6 @@ current_search(
       curwin->w_cursor = orig_pos;
       if (VIsual_active)
         VIsual = save_VIsual;
-      p_ws = old_p_ws;
       return FAIL;
     } else if (i == 0 && !result) {
       if (forward) {  // try again from start of buffer
@@ -4109,8 +4112,6 @@ current_search(
   }
 
   pos_T start_pos = pos;
-
-  p_ws = old_p_ws;
 
   if (!VIsual_active) {
     VIsual = start_pos;
