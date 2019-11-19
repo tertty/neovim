@@ -13,7 +13,5 @@ jobs:
       run: sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
     - name: Attempt to build NeoVim
       run: |
-        echo Jumping into directory...,
-        cd neovim,
         echo Making project...,
         make CMAKE_BUILD_TYPE=RelWithDebInfo
