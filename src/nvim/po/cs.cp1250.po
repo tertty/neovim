@@ -3365,8 +3365,8 @@ msgstr "osudová chyba v cs_manage_matches"
 
 #: ../if_cscope.c:1693
 #, fuzzy, c-format
-msgid "Cscope tag: %s"
-msgstr "Cscope tag: %s\n"
+msgid "cscope tag: %s"
+msgstr "cscope tag: %s\n"
 
 #: ../if_cscope.c:1711
 #, fuzzy
