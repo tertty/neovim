@@ -3301,8 +3301,8 @@ msgstr "E570: cs_manage_matches 嚴重錯誤"
 
 #: ../if_cscope.c:1693
 #, c-format
-msgid "Cscope tag: %s"
-msgstr "Cscope 標籤(tag): %s"
+msgid "cscope tag: %s"
+msgstr "cscope 標籤(tag): %s"
 
 #: ../if_cscope.c:1711
 msgid ""

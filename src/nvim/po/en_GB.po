@@ -3199,7 +3199,7 @@ msgstr ""
 
 #: ../if_cscope.c:1693
 #, c-format
-msgid "Cscope tag: %s"
+msgid "cscope tag: %s"
 msgstr ""
 
 #: ../if_cscope.c:1711
@@ -3214,7 +3214,7 @@ msgstr ""
 
 #: ../if_cscope.c:1809
 #, fuzzy, c-format
-msgid "E609: Cscope error: %s"
+msgid "E609: cscope error: %s"
 msgstr "E40: Cannot open errorfile %s"
 
 #: ../if_cscope.c:2053

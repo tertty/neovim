@@ -3237,7 +3237,7 @@ msgstr "E570: błąd krytyczny w cs_manage_matches"
 
 #: ../if_cscope.c:1693
 #, c-format
-msgid "Cscope tag: %s"
+msgid "cscope tag: %s"
 msgstr "Znacznik cscope: %s"
 
 #: ../if_cscope.c:1711
@@ -3254,7 +3254,7 @@ msgstr "nazwa pliku  / kontekst / wiersz\n"
 
 #: ../if_cscope.c:1809
 #, c-format
-msgid "E609: Cscope error: %s"
+msgid "E609: cscope error: %s"
 msgstr "E609: Błąd cscope: %s"
 
 #: ../if_cscope.c:2053

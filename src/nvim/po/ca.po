@@ -3290,7 +3290,7 @@ msgstr "E570: Error fatal a cs_manage_matches"
 
 #: ../if_cscope.c:1693
 #, c-format
-msgid "Cscope tag: %s"
+msgid "cscope tag: %s"
 msgstr "Etiqueta cscope: %s"
 
 #: ../if_cscope.c:1711
@@ -3307,7 +3307,7 @@ msgstr "fitxer / context / línia\n"
 
 #: ../if_cscope.c:1809
 #, c-format
-msgid "E609: Cscope error: %s"
+msgid "E609: cscope error: %s"
 msgstr "E609: Error de cscope: %s"
 
 #: ../if_cscope.c:2053
