@@ -1,0 +1,14 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Attempt to build neovim
+      run: sudo port install ninja libtool autoconf automake cmake pkgconfig gettext
+  
