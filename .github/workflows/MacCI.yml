@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Gather pre-requisites
-      run: bre install ninja libtool automake cmake pkg-config gettext
+      run: brew install ninja libtool automake cmake pkg-config gettext
     - name: Attempt to build neovim
       run: |
         echo Making project...,
