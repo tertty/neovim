@@ -1,4 +1,4 @@
-name: CI
+name: MAC CI
 
 on: [push]
 
@@ -9,6 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Gather pre-requisites
+      run: bre install ninja libtool automake cmake pkg-config gettext
     - name: Attempt to build neovim
-      run: sudo port install ninja libtool autoconf automake cmake pkgconfig gettext
-  
+      run: |
+        echo Making project...,
+        make CMAKE_BUILD_TYPE=RelWithDebInfo
