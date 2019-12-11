@@ -15,3 +15,7 @@ jobs:
       run: |
         echo Making project...,
         make CMAKE_BUILD_TYPE=RelWithDebInfo
+    - name: Run automated testing
+      run: |
+        echo Running first test, open TODO with no notes,
+        nvim -c todo
