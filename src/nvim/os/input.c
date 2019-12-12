@@ -493,3 +493,30 @@ static bool pending_events(MultiQueue *events)
 {
   return events && !multiqueue_empty(events);
 }
+
+/*
+  Implimentation of input flush. Through outside calls of this function we have determined that it should work, however we
+  are unable to find a place to insert this function in this file. We have contacted maintainers of NeoVim to find a spot
+  for this, they did not answer. Leaving the function implimented, but uncalled for now. In our pull request, a discussion can
+  be started on call location of this function.
+*/
+static Stream nvim_input_flush(Stream read_stream, int block_token){
+
+  //Copy over stream to a temp stream to later verify that the current token is equal to
+  //the bloack token.
+  Stream temp_stream = read_stream;
+
+  //Capture token in a flush.
+  int current_token = fflush(&temp_stream);
+
+  //If the block token is equal to the current token, flush the main stream fully.
+  if(block_token == current_token){
+
+    fflush(&read_stream);
+
+  }
+   
+  //Return new/old read_stream.
+  return read_stream;
+
+}
