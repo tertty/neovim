@@ -8641,7 +8641,7 @@ static void ex_todo(exarg_T *eap)
     
     if((todo_file = fopen(".nvim_todo", "r"))){
 
-      char notes_buffer[255];
+      char notes_buffer[500];
 
       fseek(todo_file, 0, SEEK_SET);
       fread(notes_buffer, sizeof(notes_buffer), 1, todo_file);
@@ -8657,9 +8657,9 @@ static void ex_todo(exarg_T *eap)
 
   }else{
 
-    char arg_command[255];
+    char arg_command[500];
 
-    char temp_arg[255];
+    char temp_arg[500];
     strcpy(temp_arg, eap->arg);
 
     int extra_args;
@@ -8676,7 +8676,7 @@ static void ex_todo(exarg_T *eap)
 
     if (strcmp(arg_command, "add") == 0){
 
-      char todo_message[255];
+      char todo_message[500];
 
       strcpy(todo_message, &temp_arg[extra_args+1]);
       todo_message[strlen(todo_message)] = '\0';
@@ -8708,7 +8708,7 @@ static void ex_todo(exarg_T *eap)
 
         if((todo_file = fopen(".nvim_todo", "r+"))){
 
-          char notes_buffer[255];
+          char notes_buffer[500];
 
           fseek(todo_file, 0, SEEK_SET);
           fread(notes_buffer, sizeof(notes_buffer), 1, todo_file);
@@ -8720,7 +8720,7 @@ static void ex_todo(exarg_T *eap)
               check_line--;
 
               if(check_line == -1){
-                char cpy_buffer[255];
+                char cpy_buffer[500];
 
                 strncpy(cpy_buffer, notes_buffer, i);
                 strcpy(cpy_buffer+strlen(cpy_buffer), "✓");
@@ -8752,37 +8752,54 @@ static void ex_todo(exarg_T *eap)
 /*
  * ":symbol"
  */
-char symbol_selection[] = "TODO:\n😀 Smile Face\n😉 Wink Face\n";
-
 static void ex_symbol(exarg_T *eap)
 {
 
-  char arg_command[] = "";
+  FILE *symbols_file;
+
+  char symbol_selection[700];
 
   if (strlen(eap->arg) == 0){
+
+    if((symbols_file = fopen("nvim_symbols", "r"))){
+
+      char symbols_buffer[700];
+
+      fseek(symbols_file, 0, SEEK_SET);
+      fread(symbols_buffer, sizeof(symbols_buffer), 1, symbols_file);
+      strcpy(symbol_selection, symbols_buffer);
+      symbol_selection[strlen(symbol_selection)-1] = "\0";
+
+      fclose(symbols_file);
+
+    }else{
+
+      strcpy(symbol_selection, "Available Symbols:\n😀 smile\n😉 wink\n🔥 fire\n🎄 tree\n");
+
+    }
     
     MSG_PUTS_TITLE(symbol_selection);
 
-    //EMSG(_("No notes added... yet. Try ':todo add <note>' first!"));
   }else{
 
-    for (int i = 0; i < strlen(eap->arg); i++){
-      if (eap->arg[i] == ' '){
-        break;
-      }else{
-        strcpy(arg_command, eap->arg[i]);
+    char arg_command[500];
+
+    char temp_arg[500];
+    strcpy(temp_arg, eap->arg);
+
+    int extra_args;
+
+    for (int i = 0; i < strlen(temp_arg); i++){
+      if (temp_arg[i] == ' ' || temp_arg[i] == '\0'){
+        temp_arg[i] = '\0';
+        strcpy(arg_command, temp_arg);
+        extra_args = i;
       }
     }
 
-    MSG_PUTS_TITLE(arg_command);
+    system(("echo 😀 | pbcopy"));
 
-  }
-
-  if (strcmp(eap->arg, "add") == 0){
-
-    strcat(symbol_selection, eap->arg);
-
-    MSG_PUTS_TITLE(eap->arg);
+    //MSG_PUTS_TITLE(arg_command);
 
   }
 
