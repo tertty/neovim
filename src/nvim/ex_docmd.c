@@ -8630,17 +8630,19 @@ static void ex_stag(exarg_T *eap)
 /*
  * ":todo"
  */
-//char todo_notes[] = "TODO:\n*Kick ass\n*Go to space\n*Represent the human race";
-
 static void ex_todo(exarg_T *eap)
 {
 
+  //Create file for NeoVim to read and write notes to.
   FILE *todo_file;
 
+  //If no extra arguments are given in :todo...
   if (strlen(eap->arg) == 0){
     
+    //Check to see if notes have already been created, if not prompt the user they need to make some first.
     if((todo_file = fopen(".nvim_todo", "r"))){
 
+      //Read in already created notes from notes file.
       char notes_buffer[500];
 
       fseek(todo_file, 0, SEEK_SET);
@@ -8653,10 +8655,12 @@ static void ex_todo(exarg_T *eap)
 
     }
 
+    //Be kind, please rewind... -er I mean close the file.
     fclose(todo_file);
 
   }else{
 
+    //If arguments are given, read them in.
     char arg_command[500];
 
     char temp_arg[500];
@@ -8664,6 +8668,7 @@ static void ex_todo(exarg_T *eap)
 
     int extra_args;
 
+    //Read the entire command passed into the input, seperate the argument from the rest of it.
     for (int i = 0; i < strlen(temp_arg); i++){
       if (temp_arg[i] == ' ' || temp_arg[i] == '\0'){
         temp_arg[i] = '\0';
@@ -8674,15 +8679,19 @@ static void ex_todo(exarg_T *eap)
   
     strcpy(temp_arg, eap->arg);
 
+    //If the argument is equal to add, fire.
     if (strcmp(arg_command, "add") == 0){
 
       char todo_message[500];
 
+      //Get the text to add to the new note from the command input.
       strcpy(todo_message, &temp_arg[extra_args+1]);
       todo_message[strlen(todo_message)] = '\0';
 
       bool todo_made = false;
 
+      //Again, make sure a file has already been created. If it has, append. Otherwise create a new note with the
+      //specified structure.
       if((todo_file = fopen(".nvim_todo", "r"))){
         todo_made = true;
       }
@@ -8700,12 +8709,15 @@ static void ex_todo(exarg_T *eap)
 
     }
 
+    //If the argument is equal to remove, fire.
     if (strcmp(arg_command, "remove") == 0){
 
+      //If we are removing all notes... delete file.
       if (strcmp(&temp_arg[extra_args+1], "all") == 0){
         remove(".nvim_todo");
       }else{
 
+        //If we are removing a certain note, find the line and add a check mark unicode character.
         if((todo_file = fopen(".nvim_todo", "r+"))){
 
           char notes_buffer[500];
@@ -8713,12 +8725,14 @@ static void ex_todo(exarg_T *eap)
           fseek(todo_file, 0, SEEK_SET);
           fread(notes_buffer, sizeof(notes_buffer), 1, todo_file);
 
+          //Convert number of line string to int.
           int check_line = atoi(&temp_arg[extra_args+1]);
 
           for (int i = 0; i < strlen(notes_buffer); i++){
             if (notes_buffer[i] == '\n'){
               check_line--;
 
+              //Take the first half of the entire notes file, copy it, insert check mark unicode, add the rest in after that.
               if(check_line == -1){
                 char cpy_buffer[500];
 
@@ -8732,6 +8746,7 @@ static void ex_todo(exarg_T *eap)
             }
           }
 
+          //Verify change with user.
           MSG_PUTS_TITLE(notes_buffer);
 
         }else{
@@ -8755,16 +8770,20 @@ static void ex_todo(exarg_T *eap)
 static void ex_symbol(exarg_T *eap)
 {
 
+  //Create file for symbols to be read from.
   FILE *symbols_file;
 
   char symbol_selection[700];
 
+  //Only looking for one argument...
   if (strlen(eap->arg) == 0){
 
+    //Check to see if custom symbol file exists, if it does use that instead of defaults.
     if((symbols_file = fopen("nvim_symbols", "r"))){
 
       char symbols_buffer[700];
 
+      //Read in file.
       fseek(symbols_file, 0, SEEK_SET);
       fread(symbols_buffer, sizeof(symbols_buffer), 1, symbols_file);
       strcpy(symbol_selection, symbols_buffer);
@@ -8774,32 +8793,12 @@ static void ex_symbol(exarg_T *eap)
 
     }else{
 
+      //Otherwise use default symbols...
       strcpy(symbol_selection, "Available Symbols:\n😀 smile\n😉 wink\n🔥 fire\n🎄 tree\n");
 
     }
     
     MSG_PUTS_TITLE(symbol_selection);
-
-  }else{
-
-    char arg_command[500];
-
-    char temp_arg[500];
-    strcpy(temp_arg, eap->arg);
-
-    int extra_args;
-
-    for (int i = 0; i < strlen(temp_arg); i++){
-      if (temp_arg[i] == ' ' || temp_arg[i] == '\0'){
-        temp_arg[i] = '\0';
-        strcpy(arg_command, temp_arg);
-        extra_args = i;
-      }
-    }
-
-    system(("echo 😀 | pbcopy"));
-
-    //MSG_PUTS_TITLE(arg_command);
 
   }
 
